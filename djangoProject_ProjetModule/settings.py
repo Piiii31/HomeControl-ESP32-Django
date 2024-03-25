@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-l(42qcr59qdu4xgs%(6yqk()dcg9w-&s@c#rbgn42%bw^l41d)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.1.138','postabdou.postgres.database.azure.com','.vercel.app']
+ALLOWED_HOSTS = ['192.168.1.138','postabdou.postgres.database.azure.com','.vercel.app','https://homenativeapp.azurewebsites.net']
 
 AUTH_USER_MODEL = 'djangoProject_ProjetModule.Customuser'
 
