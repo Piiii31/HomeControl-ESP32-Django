@@ -168,9 +168,9 @@ def fetch_ir_codes(request, device_id):
             ir_code_id = request.data.get('ir_code_id')
             try:
                 ir_code = IRCode.objects.get(id=ir_code_id, device=device)
-                ir_code.clicked = 1
+                ir_code.clicked = 1 if ir_code.clicked == 0 else 0  # Toggle the clicked state
                 ir_code.save()
-                return JsonResponse({'message': 'IR code clicked status updated successfully'}, status=200)
+                return JsonResponse({'message': 'IR code clicked status toggled successfully'}, status=200)
             except IRCode.DoesNotExist:
                 return JsonResponse({'error': 'IR code not found'}, status=404)
     except Device.DoesNotExist:
