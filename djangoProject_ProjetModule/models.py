@@ -78,3 +78,4 @@ class IRCode(models.Model):
     code = models.CharField(max_length=100)
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    clicked = models.IntegerField(default=0)
