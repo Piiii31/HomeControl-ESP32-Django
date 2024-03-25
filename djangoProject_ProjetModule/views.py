@@ -153,15 +153,25 @@ def store_ir_codes(request):
 
         return Response(status=status.HTTP_201_CREATED)
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 def fetch_ir_codes(request, device_id):
     try:
         device = Device.objects.get(device_id=device_id)
-        ir_codes = IRCode.objects.filter(device=device).values('code')
-        response_data = {
-            'device_id': device_id,
-            'ir_codes': list(ir_codes)
-        }
-        return JsonResponse(response_data)
+        if request.method == 'GET':
+            ir_codes = IRCode.objects.filter(device=device).values('id', 'code', 'clicked')
+            response_data = {
+                'device_id': device_id,
+                'ir_codes': list(ir_codes)
+            }
+            return JsonResponse(response_data)
+        elif request.method == 'PUT':
+            ir_code_id = request.data.get('ir_code_id')
+            try:
+                ir_code = IRCode.objects.get(id=ir_code_id, device=device)
+                ir_code.clicked = 1
+                ir_code.save()
+                return JsonResponse({'message': 'IR code clicked status updated successfully'}, status=200)
+            except IRCode.DoesNotExist:
+                return JsonResponse({'error': 'IR code not found'}, status=404)
     except Device.DoesNotExist:
         return JsonResponse({'error': 'Device not found'}, status=404)
