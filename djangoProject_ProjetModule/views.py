@@ -175,3 +175,31 @@ def fetch_ir_codes(request, device_id):
                 return JsonResponse({'error': 'IR code not found'}, status=404)
     except Device.DoesNotExist:
         return JsonResponse({'error': 'Device not found'}, status=404)
+
+
+stored_code = None
+
+@api_view(['POST'])
+def store_code(request):
+    global stored_code
+
+    if request.method == 'POST':
+        code = request.POST.get('code')
+        if code:
+            stored_code = code
+            return JsonResponse({'status': 'success'})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+
+
+@api_view(['GET'])
+def fetch_code(request):
+    global stored_code
+
+    if request.method == 'GET':
+        if stored_code:
+            return JsonResponse({'status': 'success', 'code': stored_code})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'No code stored'})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'})

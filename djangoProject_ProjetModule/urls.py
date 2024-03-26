@@ -32,5 +32,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('store-ir-codes/', views.store_ir_codes, name='store_ir_codes'),
     path('fetch-ir-codes/<str:device_id>/', fetch_ir_codes, name='fetch_ir_codes'),
+    path('store-code/', views.store_code, name='store_code'),
+    path('fetch-code/', views.fetch_code, name='fetch_code'),
 ]
 
