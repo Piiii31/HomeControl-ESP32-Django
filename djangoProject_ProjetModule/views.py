@@ -158,10 +158,11 @@ def fetch_ir_codes(request, device_id):
     try:
         device = Device.objects.get(device_id=device_id)
         if request.method == 'GET':
-            ir_codes = IRCode.objects.filter(device=device).values('id', 'code', 'clicked')
+            ir_codes = IRCode.objects.filter(device=device).values('id', 'code', 'clicked','functionality')
             response_data = {
                 'device_id': device_id,
-                'ir_codes': list(ir_codes)
+                'ir_codes': list(ir_codes),
+                'functionality': [code['functionality'] for code in ir_codes]
             }
             return JsonResponse(response_data)
         elif request.method == 'PUT':
