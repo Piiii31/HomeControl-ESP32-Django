@@ -1,24 +1,18 @@
 import json
 import logging
-
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_http_methods
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from django.http import HttpResponseRedirect
 from djangoProject_ProjetModule.models import Device, CustomUser
 from .models import IRCode
-from django.urls import reverse  # Add this import statement
-from django.shortcuts import redirect
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseNotAllowed
-from django.core.cache import cache
 from django.db import transaction
 
 User = get_user_model()
@@ -192,3 +186,11 @@ def get_power_column_clicked_or_not(request, user_id, device_id):
         return JsonResponse(response_data)
     except Device.DoesNotExist:
         return JsonResponse({'error': 'Device not found'}, status=404)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_device(request, device_id):
+    device = get_object_or_404(Device, device_id=device_id)
+    device.delete()
+    return Response({'message': 'Device deleted successfully'}, status=200)

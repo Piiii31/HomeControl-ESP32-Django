@@ -33,6 +33,7 @@ urlpatterns = [
     path('store-ir-codes/', views.store_ir_codes, name='store_ir_codes'),
     path('fetch-ir-codes/<str:device_id>/', fetch_ir_codes, name='fetch_ir_codes'),
     path('api/get_power_column/<str:user_id>/<str:device_id>/', views.get_power_column_clicked_or_not, name='get_power_column'),
+    path('delete_device/<int:device_id>/', views.delete_device, name='delete_device'),
 
 ]
 
