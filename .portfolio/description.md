@@ -1,0 +1,1 @@
+The **HomeControl ESP32-Django** project allows users to send IR signals from ESP32 devices to a Django backend. The backend processes these signals and stores them in a PostgreSQL database for future reference and control. This integration facilitates smart home functionalities by allowing users to interact with their home appliances remotely.

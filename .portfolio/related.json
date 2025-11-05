@@ -1,0 +1,7 @@
+{
+  "projects": [
+    "esp32cam_Stream",
+    "HomeControl",
+    "HomeControl-ESP32-ESP32CAM"
+  ]
+}

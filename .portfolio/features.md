@@ -1,0 +1,4 @@
+- **Receive IR Signals**: Capture IR signals sent from ESP32 devices.
+- **Database Storage**: Store the captured signals in a PostgreSQL database for easy access and management.
+- **Remote Control**: Control home appliances using the stored IR signals.
+- **User-friendly Interface**: A simple web interface for managing and controlling IR signals.

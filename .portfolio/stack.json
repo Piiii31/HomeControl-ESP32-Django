@@ -1,0 +1,6 @@
+{
+  
+  "backend": ["Django","Python"],
+  "database": ["PostgreSQL"],
+  "others": ["ESP32"]
+}
